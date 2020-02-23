@@ -45,29 +45,29 @@ public class DatabaseTest {
 
                 // Prepare Update Query
 
-                query = "INSERT INTO people (firstname, lastname) VALUES (?, ?)";
-                pstUpdate = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-                pstUpdate.setString(1, newFirstName);
-                pstUpdate.setString(2, newLastName);
+//                query = "INSERT INTO people (firstname, lastname) VALUES (?, ?)";
+//                pstUpdate = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+//                pstUpdate.setString(1, newFirstName);
+//                pstUpdate.setString(2, newLastName);
 
                 // Execute Update Query
 
-                updateCount = pstUpdate.executeUpdate();
-
-                // Get New Key; Print To Console
-
-                if (updateCount > 0) {
-
-                    resultset = pstUpdate.getGeneratedKeys();
-
-                    if (resultset.next()) {
-
-                        System.out.print("Update Successful!  New Key: ");
-                        System.out.println(resultset.getInt(1));
-
-                    }
-
-                }
+//                updateCount = pstUpdate.executeUpdate();
+//
+//                // Get New Key; Print To Console
+//
+//                if (updateCount > 0) {
+//
+//                    resultset = pstUpdate.getGeneratedKeys();
+//
+//                    if (resultset.next()) {
+//
+//                        System.out.print("Update Successful!  New Key: ");
+//                        System.out.println(resultset.getInt(1));
+//
+//                    }
+//
+//                }
 
 
                 /* Prepare Select Query */
