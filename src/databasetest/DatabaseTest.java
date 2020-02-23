@@ -22,7 +22,7 @@ public class DatabaseTest {
 
             /* Identify the Server */
 
-            String server = ("jdbc:mysql://localhost/db_test");
+            String server = ("jdbc:mysql://localhost/p2_test");
             String username = "root";
             String password = "CS488";
             System.out.println("Connecting to " + server + "...");
@@ -161,6 +161,7 @@ public class DatabaseTest {
 
         catch (Exception e) {
             System.err.println(e.toString());
+            e.printStackTrace();
         }
 
         /* Close Other Database Objects */
