@@ -1,12 +1,17 @@
 package databasetest;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.*;
 
 public class DatabaseTest {
 
     public static JSONArray getJSONData () {
+
+        JSONObject names = null;
+        JSONArray jsonArray = new JSONArray();
         Connection conn = null;
         PreparedStatement pstSelect = null, pstUpdate = null;
         ResultSet resultset = null;
@@ -97,18 +102,19 @@ public class DatabaseTest {
 
                         /* Get Column Names; Print as Table Header */
 
+
                         for (int i = 1; i <= columnCount; i++) {
 
                             key = metadata.getColumnLabel(i);
 
-                            System.out.format("%20s", key);
+                           // System.out.format("%20s", key);
 
                         }
 
                         /* Get Data; Print as Table Rows */
 
                         while(resultset.next()) {
-
+                            names = new JSONObject();
                             /* Begin Next ResultSet Row */
 
                             System.out.println();
@@ -120,15 +126,24 @@ public class DatabaseTest {
                                 value = resultset.getString(i);
 
                                 if (resultset.wasNull()) {
-                                    System.out.format("%20s", "NULL");
+                                    //System.out.format("%20s", "NULL");
                                 }
 
                                 else {
-                                    System.out.format("%20s", value);
+                                    //System.out.format("%20s", value);
                                 }
 
                             }
 
+                            for (int i = 2; i <= columnCount; i++) {
+                                key = metadata.getColumnLabel(i);
+                                value = resultset.getString(i);
+
+
+                                names.put(key,value);
+
+                            }
+                            jsonArray.add(names);
                         }
 
                     }
@@ -143,6 +158,7 @@ public class DatabaseTest {
 
                     }
 
+                    System.out.println(jsonArray);
                     /* Check for More Data */
 
                     hasresults = pstSelect.getMoreResults();
@@ -175,7 +191,8 @@ public class DatabaseTest {
             if (pstUpdate != null) { try { pstUpdate.close(); pstUpdate = null; } catch (Exception e) {} }
 
         }
-        return null;
+
+        return jsonArray;
     }
 
     public static void main(String[] args) {
